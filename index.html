@@ -25,58 +25,54 @@
 </head>
 
 <body>
+    
     <main>
-        <header>
-            <h2 style="text-align: center; margin-top: 15px;">Age Calculator</h2>
-        </header>
         <div class="container">
-
-            <div>
-                <form action="" class="form">
-                    <div class="day">
-                        <h4>Day</h4>
-                        <input type="number" name="" id="days" placeholder="DD" minlength="1" maxlength="2">
-                        <p id="day-error" class="warning">
-
-                        </p>
-                    </div>
-                    <div class="month">
-                        <h4>Month</h4>
-                        <input type="number" name="" id="months" min="1" max="12" placeholder="MM
-                      ">
-                        <p id="month-error" class="warning">
-
-                        </p>
-                    </div>
-                    <div class="year">
-                        <h4>Year</h4>
-                        <input type="number" name="" id="years" min="1900" max="2023" placeholder="YYYY">
-                        <p id="year-error" class="warning">
-
-                        </p>
-                    </div>
-            </div>
+            <header>
+                <div>
+                    <form action="" class="form">
+                        <div class="day">
+                            <h4>Day</h4>
+                            <input type="number" name="" id="days" placeholder="DD">
+                            <p id="day-error" class="warning">
+    
+                            </p>
+                        </div>
+                        <div class="month">
+                            <h4>Month</h4>
+                            <input type="number" name="" id="months" min="1" max="12" placeholder="MM
+                    ">
+                            <p id="month-error" class="warning">
+    
+                            </p>
+                        </div>
+                        <div class="year">
+                            <h4>Year</h4>
+                            <input type="number" name="" id="years" min="1900" max="2023" placeholder="YYYY">
+                            <p id="year-error" class="warning">
+    
+                            </p>
+                        </div>
+                </div>
             </header>
-            
+    
             <hr />
-
+    
             <div>
                 <div class="btn">
-                    <button class="submit-btn" onclick="updateCalculation()"><img
-                            src="./assets/images/icon-arrow.svg"></button>
-                    <p id="result"></p>
+                    <button class="submit-btn"><img src="./assets/images/icon-arrow.svg"></button>
                 </div>
-
+    
                 <div class="flex">
                     <span class="output-year">--</span>
                     <p>Years</p>
                 </div>
-
+    
                 <div class="flex">
                     <span class="output-month">--</span>
                     <p>Months</p>
                 </div>
-
+    
                 <div class="flex">
                     <span class="output-day">--</span>
                     <p>Days</p>
@@ -84,6 +80,7 @@
             </div>
         </div>
     </main>
+
 
 
     <div class="attribution">

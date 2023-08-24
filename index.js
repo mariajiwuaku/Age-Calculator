@@ -1,19 +1,16 @@
-
-const months = ["January", "February", "March", "April", "May", "June", "July", "August", "Sept"]
-
-//  output element
+// select the output element
  var outputYear = document.querySelector('.output-year');
  var outputMonth = document.querySelector('.output-month');
  var outputDay = document.querySelector('.output-day');
  var submit = document.querySelector('.submit-btn')
 
-// input element
+// select the input element
   let isValid = false;
   var inputYear = document.querySelector('#years');
   var inputMonth = document.querySelector('#months');
   var inputDay = document.querySelector('#days');
 
-// error element
+// select the error element
 var errorDay = document.querySelector('#day-error');
 var errorMonth = document.querySelector('#month-error');
 var errorYear = document.querySelector('#year-error')
@@ -80,40 +77,100 @@ inputYear.addEventListener('input', function(e){
   }
 });
 
+// Retrieve saved birthDateObj from local storage
+var savedBirthDate = localStorage.getItem('birthDateObj');
+var birthDateObj;
+
+if (savedBirthDate) {
+  birthDateObj = new Date(savedBirthDate);
+} else {
+  birthDateObj = null;
+}
+
+// Add event listener
+submit.addEventListener('click', calculate);
+
+
+
+
 
 
 //Local Storage
+// Retrieve saved birthDateObj, input values, and output values from local storage
+var savedBirthDate = localStorage.getItem('birthDateObj');
+var savedInputYear = localStorage.getItem('inputYear');
+var savedInputMonth = localStorage.getItem('inputMonth');
+var savedInputDay = localStorage.getItem('inputDay');
+var savedOutputYear = localStorage.getItem('outputYear');
+var savedOutputMonth = localStorage.getItem('outputMonth');
+var savedOutputDay = localStorage.getItem('outputDay');
 
-window.onload = function(){
-  if(localStorage)
-  {
-    populate();
-    const form = document.getElementById('form');
-    form.addEventListener('submit', Store);
+var birthDateObj;
+if (savedBirthDate) {
+  birthDateObj = new Date(savedBirthDate);
+} else {
+  birthDateObj = null;
+}
+
+// Set saved input values to input fields
+if (savedInputYear) {
+  inputYear.value = savedInputYear;
+}
+if (savedInputMonth) {
+  inputMonth.value = savedInputMonth;
+}
+if (savedInputDay) {
+  inputDay.value = savedInputDay;
+}
+
+// Set saved output values
+if (savedOutputYear) {
+  outputYear.textContent = savedOutputYear;
+}
+if (savedOutputMonth) {
+  outputMonth.textContent = savedOutputMonth;
+}
+if (savedOutputDay) {
+  outputDay.textContent = savedOutputDay;
+}
+
+// Add event listener
+submit.addEventListener('click', calculate);
+
+// ...
+
+function calculate() {
+  if (isValid) {
+    let birthDate = `${inputMonth.value}/${inputDay.value}/${inputYear.value}`;
+    birthDateObj = new Date(birthDate);  // Update the birthDateObj
+
+    let currentDate = new Date();  // Get the current date
+
+    let ageDiffMill = currentDate - birthDateObj;  // Calculate the difference in milliseconds
+    let ageDate = new Date(ageDiffMill);
+
+    // Calculate age components
+    let ageYears = ageDate.getUTCFullYear() - 1970;
+    let ageMonths = ageDate.getUTCMonth();
+    let ageDays = ageDate.getUTCDate() - 1;
+
+    // Displaying everything
+    outputDay.textContent = ageDays;
+    outputMonth.textContent = ageMonths;
+    outputYear.textContent = ageYears;
+
+    // Save updated birthDateObj, input values, and output values in local storage
+    localStorage.setItem('birthDateObj', birthDateObj.toJSON());
+    localStorage.setItem('inputYear', inputYear.value);
+    localStorage.setItem('inputMonth', inputMonth.value);
+    localStorage.setItem('inputDay', inputDay.value);
+    localStorage.setItem('outputYear', ageYears);
+    localStorage.setItem('outputMonth', ageMonths);
+    localStorage.setItem('outputDay', ageDays);
+  } else {
+    alert('error');
   }
-  else{
-    window.alert('local storage is not supported')
-  }
+  event.preventDefault();
 }
 
-function Store() {
-  let day = document.forms.calc.days.value;
-  let month = document.forms.calc.months.value;
-  let year = document.forms.calc.years.value;
-  localStorage.setItem('days', day);
-  localStorage.setItem('months', month);
-  localStorage.setItem('years', year);
 
-
-}
-function populate() {
-  let day = document.forms.calc.days;
-  let month = document.forms.calc.months;
-  let year = document.forms.calc.years;
-  localStorage.getItem('days', day);
-  localStorage.getItem('months', month);
-  localStorage.getItem('years', year);
-if(localStorage.getItem('days')!=null){
-  day.value=localStorage.getItem('days');
-}
-}
